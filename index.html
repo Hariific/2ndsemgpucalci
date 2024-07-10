@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Second Semester GPA Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 20px;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            display: block;
+            margin: 20px auto 0;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f3f3f3;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SECOND SEMESTER GPA CALCULATOR</h1>
+        <form id="gpaForm">
+            <label for="engGrade">English grade:</label>
+            <input type="text" id="engGrade" name="engGrade"><br><br>
+            
+            <label for="tamGrade">Tamil grade:</label>
+            <input type="text" id="tamGrade" name="tamGrade"><br><br>
+            
+            <label for="matGrade">Maths grade:</label>
+            <input type="text" id="matGrade" name="matGrade"><br><br>
+            
+            <label for="phyGrade">Physics grade:</label>
+            <input type="text" id="phyGrade" name="phyGrade"><br><br>
+            
+            <label for="chemGrade">Chemistry grade:</label>
+            <input type="text" id="chemGrade" name="chemGrade"><br><br>
+            
+            <label for="psppGrade">PSPP grade:</label>
+            <input type="text" id="psppGrade" name="psppGrade"><br><br>
+            
+            <label for="egGrade">EG grade:</label>
+            <input type="text" id="egGrade" name="egGrade"><br><br>
+            
+            <label for="scilabGrade">Physics/Chemistry Lab grade:</label>
+            <input type="text" id="scilabGrade" name="scilabGrade"><br><br>
+            
+            <label for="pylabGrade">Python Lab grade:</label>
+            <input type="text" id="pylabGrade" name="pylabGrade"><br><br>
+
+            <button type="submit">Calculate GPA</button>
+        </form>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById('gpaForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Retrieve grades from input fields
+            let eng = gradeToNumber(document.getElementById('engGrade').value.trim());
+            let tam = gradeToNumber(document.getElementById('tamGrade').value.trim());
+            let mat = gradeToNumber(document.getElementById('matGrade').value.trim());
+            let phy = gradeToNumber(document.getElementById('phyGrade').value.trim());
+            let chem = gradeToNumber(document.getElementById('chemGrade').value.trim());
+            let pspp = gradeToNumber(document.getElementById('psppGrade').value.trim());
+            let eg = gradeToNumber(document.getElementById('egGrade').value.trim());
+            let scilab = gradeToNumber(document.getElementById('scilabGrade').value.trim());
+            let pylab = gradeToNumber(document.getElementById('pylabGrade').value.trim());
+
+            // GPA calculation logic
+            let out = ((3 * eng) + tam + (4 * mat) + (3 * phy) + (3 * chem) + (3 * pspp) + (3 * eg) + (2 * scilab) + (2 * pylab)) / 24;
+
+            // Display result
+            document.getElementById('result').innerHTML = `<h2>Your GPA for the second semester is: ${out.toFixed(2)}</h2>`;
+        });
+
+        function gradeToNumber(grade) {
+            switch (grade.toLowerCase()) {
+                case 'o':
+                    return 10;
+                case 'a+':
+                    return 9;
+                case 'a':
+                    return 8;
+                case 'b+':
+                    return 7;
+                case 'b':
+                    return 6;
+                case 'c':
+                    return 5;
+                case 'ra':
+                case 'sa':
+                case 'w':
+                    alert("Next time, study better!");
+                    return 0;
+                default:
+                    alert("There's a typo or invalid grade entered.");
+                    return -999999999999;
+            }
+        }
+    </script>
+</body>
+</html>
